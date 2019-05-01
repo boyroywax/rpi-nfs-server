@@ -138,4 +138,7 @@ It is time to install the NFS server and configure it.
     ```bash
     export NTOKEN=$(sudo cat /var/lib/rancher/k3s/server/node-token)
     ```
-3. 
+3. Create some workers
+    ```bash
+    curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v0.4.0" K3S_URL=https://$IP:6443 K3S_TOKEN=$NTOKEN sh -
+    ```
