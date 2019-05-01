@@ -127,3 +127,15 @@ It is time to install the NFS server and configure it.
    export NFS_MOUNT_DIR=/mnt/SSD/nfs && \ 
    sudo mount.nfs $NFS_IP:$NFS_MOUNT_DIR $LOCAL_MOUNT_DIR
    ```
+
+## Spin up k3s
+1. On your master
+   ```bash
+   curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v0.4.0" INSTALL_K3S_EXEC="--disable-agent --no-deploy traefik --no-deploy servicelb" sh -
+   ```
+   Uninstall at ```/usr/local/bin/k3s-uninstall.sh```
+2. Grab the Node Token
+    ```bash
+    export NTOKEN=$(sudo cat /var/lib/rancher/k3s/server/node-token)
+    ```
+3. 

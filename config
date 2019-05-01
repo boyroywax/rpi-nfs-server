@@ -1,0 +1,1 @@
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v0.4.0" K3S_URL=https://192.168.0.94:6443 K3S_TOKEN=K10bb2f23fe92c86b5fd55c37ce877498cec4f964651181808f3b1d34b7a4b5a75d::node:afbc85ffbd1f287a53093d62bbf7e699 sh -
