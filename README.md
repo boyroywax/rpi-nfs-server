@@ -46,7 +46,7 @@
    export MOUNT="/mnt/SSD" && \ 
    sudo mkdir -p $MOUNT
    ```
-9. Mount it. Note we mount our partition1.
+9. Mount it. Note we mount partition1.
     ```bash
     sudo mount $DRIVE"1" $MOUNT -o umask=000
     ```
@@ -57,9 +57,17 @@ Create an entry for the drive in ```/etc/fstab```
 export UUID=$(sudo blkid $DRIVE | awk '{print substr($2,7,9)}') && \  
 sudo echo "UUID=$UUID $MOUNT vfat defaults,auto,umask=000,users,rw   0      0" | sudo tee -a /etc/fstab
 ```
+Restart after this step to verify that the fstab setting is correct.  
+If your RPi does not boot, don't worry you just need to correct it using
+the section below.
 
 
 ## EXT4 Support for Mac OSX
+If something goes Wrong when editing the fstab file in the previous step,
+your RPI will not boot.  We gotta correct this as easy as possible.
+You could wipe the entire card and reload the raspian image, but lets
+just comment out the bad fstab line instead.
+
 https://inderpreetsingh.com/2014/11/02/ext4-repair-on-mac-osx/
 * Virtual Box Ubuntu VM
 * USB 3.0 Expansion Pack for Virtual Box
@@ -75,6 +83,8 @@ On Mac Machine:
 
 
 ## NFS Server on Raspberry Pi
+Now, the drive is partitioned, imaged, and set to mount on start.
+It is time to install the NFS server and configure it.
 
 1. Pre-reqs
    ```bash
@@ -82,7 +92,7 @@ On Mac Machine:
    ```
 2. Make NFS folder and give lenient permissions for local network
    ```bash
-   mkdir -p $MOUNT/nfs
+   mkdir -p $MOUNT/nfs && \ 
    sudo chmod -R 777 $MOUNT/nfs
    ```
 3. Add shared folder to ```/etc/exports```
@@ -105,11 +115,11 @@ On Mac Machine:
    ```
 2. Create local mount directory
    ```bash
-   export LOCAL_MOUNT_DIR=/mnt/nfs1
+   export LOCAL_MOUNT_DIR=/mnt/nfs1 && \ 
    sudo mkdir -p $LOCAL_MOUNT_DIR
 3. Use the mount.nfs tool
    ```bash
-   export NFS_IP=nfs1.local
-   export NFS_MOUNT_DIR=/mnt/SSD/nfs
+   export NFS_IP=nfs1.local && \ 
+   export NFS_MOUNT_DIR=/mnt/SSD/nfs && \ 
    sudo mount.nfs $NFS_IP:$NFS_MOUNT_DIR $LOCAL_MOUNT_DIR
    ```
