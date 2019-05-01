@@ -57,14 +57,17 @@ Create an entry for the drive in ```/etc/fstab```
 export UUID=$(sudo blkid $DRIVE | awk '{print substr($2,7,9)}') && \  
 sudo echo "UUID=$UUID $MOUNT vfat defaults,auto,umask=000,users,rw   0      0" | sudo tee -a /etc/fstab
 ```
-Restart after this step to verify that the fstab setting is correct.  
+Restart after this step to verify that the fstab setting is correct.
+```bash
+sudo reboot
+```  
 If your RPi does not boot, don't worry you just need to correct it using
 the section below.
 
 
 ## EXT4 Support for Mac OSX
-If something goes Wrong when editing the fstab file in the previous step,
-your RPI will not boot.  We gotta correct this as easy as possible.
+If something goes wrong when editing the fstab file in the previous step,
+your RPi will not boot.  We gotta correct this as easy as possible.
 You could wipe the entire card and reload the raspian image, but lets
 just comment out the bad fstab line instead.
 
