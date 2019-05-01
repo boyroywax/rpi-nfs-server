@@ -1,9 +1,8 @@
 # Raspberry Pi 3b+ NFS Server
 
 ## Mount drives on Raspberry Pi
-* https://thepihut.com/blogs/raspberry-pi-tutorials/17699796-formatting-and-mounting-a-usb-drive-from-a-terminal-window
-* https://www.raspberrypi.org/documentation/configuration/external-storage.md
-
+We are starting with an unformatted and unpartitioned SSD connected
+to the RPi USB port.
 
 1. Update your rig
    ```bash
@@ -50,6 +49,9 @@
     ```bash
     sudo mount $DRIVE"1" $MOUNT -o umask=000
     ```
+* https://thepihut.com/blogs/raspberry-pi-tutorials/17699796-formatting-and-mounting-a-usb-drive-from-a-terminal-window
+* https://www.raspberrypi.org/documentation/configuration/external-storage.md
+
 
 ## Mount drive on reboot. Be gentle with fstab
 Create an entry for the drive in ```/etc/fstab```
@@ -71,7 +73,6 @@ your RPi will not boot.  We gotta correct this as easy as possible.
 You could wipe the entire card and reload the raspian image, but lets
 just comment out the bad fstab line instead.
 
-https://inderpreetsingh.com/2014/11/02/ext4-repair-on-mac-osx/
 * Virtual Box Ubuntu VM
 * USB 3.0 Expansion Pack for Virtual Box
 
@@ -83,7 +84,7 @@ On Mac Machine:
 5. find your jacked fstab file and sudo edit it.
 6. Comment out the botched fstab entry
 
-
+https://inderpreetsingh.com/2014/11/02/ext4-repair-on-mac-osx/
 
 ## NFS Server on Raspberry Pi
 Now, the drive is partitioned, imaged, and set to mount on start.
