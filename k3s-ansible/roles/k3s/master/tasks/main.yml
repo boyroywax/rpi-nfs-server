@@ -40,35 +40,17 @@
     path: /var/lib/rancher/k3s/server
     mode: "{{ p.stat.mode }}"
 
+- name: Replace server command in k3s agent service with agent command
+  replace:
+    path: /etc/rancher/k3s/k3s.yaml
+    regexp: 'localhost'
+    replace: '{{ master_ip }}'
+
 - name: Retrieve kubectl config file from the master server.
   fetch: 
     src: /etc/rancher/k3s/k3s.yaml
-    dest: files/k8s.yml
+    dest: files/k3s.yml
     flat: yes
-
-# - name: Replace server command in k3s agent service with agent command
-#   replace:
-#     path: ./files/k8s.yml
-#     regexp: '^localhost$'
-#     replace: master_ip
-
-# - name: connect to k8s
-#   plugin: k8s
-#   connections:
-#     - kubeconfig: files/k8s.yml
-#       context: 'awx/{{ master_ip }}/developer'
-    
-
-# - name: Fetch a list of namespaces
-#   set_fact:
-#     projects: "{{ lookup('k8s', api_version='v1', kind='Namespace') }}"
-
-# - name: get pods  
-#   k8s_facts:
-#     kind: Pod
-#     field_selectors:
-#       - status.phase = running
-
 
 
 #- debug: msg="Node TOKEN {{ token }}"

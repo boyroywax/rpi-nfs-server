@@ -7,3 +7,4 @@ __pycache__/fabfile.cpython-37.pyc
 k3s-ansible/files/kubectl-config
 k3s-ansible/site.retry
 k3s-ansible/files/k8s.yml
+k3s-ansible/files/k3s.yml
