@@ -1,8 +1,0 @@
-k3s-gateway
-k3s-master.local
-k3s-worker-01.local
-k3s-worker-02.local
-k3s-worker-03.local
-k3s-worker-04.local
-nfs1.local
-nfs2.local

@@ -40,4 +40,10 @@
     path: /var/lib/rancher/k3s/server
     mode: "{{ p.stat.mode }}"
 
+- name: Retrieve kubectl config file from the master server.
+  fetch: 
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: files/kubectl-config
+    flat: yes
+
 #- debug: msg="Node TOKEN {{ token }}"

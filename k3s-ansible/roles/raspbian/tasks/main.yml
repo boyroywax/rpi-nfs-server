@@ -8,6 +8,10 @@
     backrefs: true
   when: ( ansible_facts.architecture is search "arm" )
 
+- name: Disable Swap
+  shell: dphys-swapfile swapoff && dphys-swapfile uninstall && update-rc.d dphys-swapfile remove
+  ignore_errors: True
+
 # - name: Rebooting on Raspbian 
 #   shell: reboot now
 #   ignore_errors: true
