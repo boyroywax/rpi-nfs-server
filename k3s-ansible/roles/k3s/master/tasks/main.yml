@@ -26,6 +26,12 @@
     path: /var/lib/rancher/k3s/server
     mode: "g+rx,o+rx"
 
+- name: Wait for node-token file to be generated
+  wait_for:
+    path: /var/lib/rancher/k3s/server/node-token
+    state: present
+    timeout: 120
+
 - name: Read Node Token from Master
   slurp:
     src: /var/lib/rancher/k3s/server/node-token

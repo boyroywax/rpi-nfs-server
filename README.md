@@ -139,6 +139,17 @@ It is time to install the NFS server and configure it.
     export NTOKEN=$(sudo cat /var/lib/rancher/k3s/server/node-token)
     ```
 3. Create some workers
+    Run on master:
     ```bash
     curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v0.4.0" K3S_URL=https://$IP:6443 K3S_TOKEN=$NTOKEN sh -
     ```
+    Get the command to copy to other nodes:
+    ```bash
+    echo "url -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v0.4.0" K3S_URL=https://$IP:6443 K3S_TOKEN=$NTOKEN sh -"
+    ```
+
+
+## Ansible k3s deployment
+
+If Raspberry pi gets stuck
+```bash

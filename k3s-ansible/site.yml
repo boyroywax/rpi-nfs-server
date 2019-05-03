@@ -13,7 +13,15 @@
   become: yes
   roles:
     - { role: k3s/master }
-    - { role: k8s}
+    - { role: k8s_ansible_setup }
+
+
+# - hosts: master
+# #  gather_facts: yes
+#   become: yes
+#   roles:
+#     - { role: k8s_command }
+
 
 - hosts: node
 #  gather_facts: yes
