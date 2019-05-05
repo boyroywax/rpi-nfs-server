@@ -1,0 +1,29 @@
+---
+- name: Ensure US locale exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  
+- name: Update apt cache and upgrade
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: Ensure NFS utilities are installed.
+  apt: 
+    name: "{{ packages }}"
+    state: installed
+    update_cache: yes
+  vars:
+    packages:
+      - nfs-common
+      - rpcbind
+      - exfat-fuse
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes

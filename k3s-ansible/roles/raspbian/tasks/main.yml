@@ -1,4 +1,23 @@
 ---
+- name: Ensure US locale exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  
+# - name: Set hostname to inventory hostname
+#   hostname: name={{inventory_hostname}}
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
 
 - name: Activating cgroup on Raspbian
   lineinfile:
@@ -11,6 +30,12 @@
 - name: Disable Swap
   shell: sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && sudo update-rc.d dphys-swapfile remove
   ignore_errors: True
+
+- name: Set GPU memory split to 16 MB
+  lineinfile:
+    path: /boot/config.txt
+    line: 'gpu_mem=16'
+    create: yes
 
 
 # - name: Rebooting on Raspbian 

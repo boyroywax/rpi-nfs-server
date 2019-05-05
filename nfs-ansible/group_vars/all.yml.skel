@@ -1,0 +1,6 @@
+ansible_user: pi/odroid/ubuntu/etc
+
+server_drive_mount_loc: /mnt/drive/nfs
+mountable_share_drive: /dev/mmcblk1p1
+
+client_mount_path: /media/{{ hostvars[groups['nfs_server'][0]]['ansible_eth0']['ipv4']['address'] }}

@@ -42,8 +42,9 @@ to the RPi USB port.
    ```
 8. Create a mount point for the drive, generally in ```media``` or ```mnt```.
    ```bash
-   export MOUNT="/mnt/SSD" && \ 
-   sudo mkdir -p $MOUNT
+   export MOUNT="/mnt/SSD" && \
+   sudo mkdir -p $MOUNT && \
+   sudo chmod 777 $MOUNT
    ```
 9. Mount it. Note we mount partition1.
     ```bash
@@ -56,7 +57,7 @@ to the RPi USB port.
 ## Mount drive on reboot. Be gentle with fstab
 Create an entry for the drive in ```/etc/fstab```
 ```bash
-export UUID=$(sudo blkid $DRIVE | awk '{print substr($2,7,9)}') && \  
+export UUID=$(sudo blkid $DRIVE | awk '{print substr($2,7,9)}') && \
 sudo echo "UUID=$UUID $MOUNT vfat defaults,auto,umask=000,users,rw   0      0" | sudo tee -a /etc/fstab
 ```
 Restart after this step to verify that the fstab setting is correct.
@@ -96,8 +97,9 @@ It is time to install the NFS server and configure it.
    ```
 2. Make NFS folder and give lenient permissions for local network
    ```bash
-   mkdir -p $MOUNT/nfs && \ 
+   mkdir -p $MOUNT/nfs && \
    sudo chmod -R 777 $MOUNT/nfs
+   sudo chown nobody:nogroup $MOUNT/nfs
    ```
 3. Add shared folder to ```/etc/exports```
    ```bash
@@ -119,14 +121,33 @@ It is time to install the NFS server and configure it.
    ```
 2. Create local mount directory
    ```bash
-   export LOCAL_MOUNT_DIR=/mnt/nfs1 && \ 
+   export LOCAL_MOUNT_DIR=/mnt/nfs1  && \
    sudo mkdir -p $LOCAL_MOUNT_DIR
 3. Use the mount.nfs tool
    ```bash
-   export NFS_IP=nfs1.local && \ 
-   export NFS_MOUNT_DIR=/mnt/SSD/nfs && \ 
+   export NFS_IP=nfs1.local && \
+   export NFS_MOUNT_DIR=/mnt/SSD/nfs && \
    sudo mount.nfs $NFS_IP:$NFS_MOUNT_DIR $LOCAL_MOUNT_DIR
    ```
+
+
+## Test your NFS server performace
+https://serverfault.com/questions/306204/what-are-typical-nfs-read-write-rates
+
+Test NFS Write speed:
+```bash
+time dd if=/dev/zero of=$LOCAL_MOUNT_DIR/testfile bs=16k count=16384
+```
+
+Test NFS Read speed:
+```bash
+time dd if=$LOCAL_MOUNT_DIR/testfile of=/dev/null bs=16k
+```
+
+
+## Edit fstab to enable the NFS mount at startup
+   ```bash
+   sudo echo "$NFS_IP:$NFS_MOUNT_DIR $LOCAL_MOUNT_DIR nfs4 _netdev,auto   0      0" | sudo tee -a /etc/fstab
 
 ## Spin up k3s
 1. On your master
@@ -154,3 +175,9 @@ It is time to install the NFS server and configure it.
 If Raspberry pi gets stuck
 ```bash
 ```
+
+
+## Amsible NFS deployment
+https://advishnuprasad.com/blog/2016/03/29/setup-nfs-server-and-client-using-ansible/
+
+
