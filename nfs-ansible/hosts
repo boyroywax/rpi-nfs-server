@@ -1,0 +1,6 @@
+[nfs_server]
+nfs1
+nfs2
+
+[nfs_clients]
+odroid-01

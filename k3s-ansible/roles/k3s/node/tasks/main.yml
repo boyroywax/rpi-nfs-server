@@ -14,3 +14,17 @@
     daemon_reload: yes
     state: restarted
     enabled: yes
+
+- name: Reload systemd daemon to ensure latest service config
+  systemd:
+    daemon_reload: yes
+
+- name: Enable and start the k3s agent service
+  service:
+    name: k3s-agent
+    enabled: yes
+    state: started
+
+- name: Reboot pi
+  reboot:
+

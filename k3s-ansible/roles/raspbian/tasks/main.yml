@@ -12,7 +12,6 @@
   shell: sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && sudo update-rc.d dphys-swapfile remove
   ignore_errors: True
 
-  
 
 # - name: Rebooting on Raspbian 
 #   shell: reboot now

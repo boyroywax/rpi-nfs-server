@@ -101,7 +101,7 @@ It is time to install the NFS server and configure it.
    ```
 3. Add shared folder to ```/etc/exports```
    ```bash
-   sudo echo -e "$MOUNT/nfs\t*(rw,sync,no_subtree_check,insecure,all_squash)" >> /etc/exports
+   sudo echo -e "$MOUNT/nfs"\t"192.168.1.0/24(rw,sync,no_subtree_check,insecure,all_squash)" >> /etc/exports
    ```
 4. Reset exports
    ```bash
@@ -115,7 +115,7 @@ It is time to install the NFS server and configure it.
 ## Quick connect NFS Client
 1. install nfs utils
    ```bash
-   sudo apt install nfs-utils
+   sudo apt install nfs-utils nfs-common
    ```
 2. Create local mount directory
    ```bash
@@ -153,3 +153,4 @@ It is time to install the NFS server and configure it.
 
 If Raspberry pi gets stuck
 ```bash
+```
