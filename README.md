@@ -87,6 +87,7 @@ On Mac Machine:
 
 https://inderpreetsingh.com/2014/11/02/ext4-repair-on-mac-osx/
 
+
 ## NFS Server on Raspberry Pi
 Now, the drive is partitioned, imaged, and set to mount on start.
 It is time to install the NFS server and configure it.
@@ -113,6 +114,7 @@ It is time to install the NFS server and configure it.
    ```bash
    sudo systemctl restart nfs-kernel-server
    ```
+
 
 ## Quick connect NFS Client
 1. install nfs utils
@@ -172,12 +174,10 @@ time dd if=$LOCAL_MOUNT_DIR/testfile of=/dev/null bs=16k
 
 ## Ansible k3s deployment
 
-If Raspberry pi gets stuck
-```bash
-```
 
 
 ## Amsible NFS deployment
-https://advishnuprasad.com/blog/2016/03/29/setup-nfs-server-and-client-using-ansible/
+* https://advishnuprasad.com/blog/2016/03/29/setup-nfs-server-and-client-using-ansible/
+* https://github.com/gc3-uzh-ch/ansible-playbooks/tree/master/roles/common/tasks
 
 
