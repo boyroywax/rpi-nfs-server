@@ -7,4 +7,4 @@ nfs_server_drive_format: yes
 nfs_server_drive_dir: /media/odroid
 nfs_server_dir: "{{nfs_server_drive_dir}}/nfs"
 
-client_mount_dir: "/media/{{hostvars[groups['nfs_server'][0]]['ansible_eth0']['ipv4']['address']}}"
+client_mount_dir: "/media/{{hostvars[groups['nfs_server'][0]]['inventory_hostname']}}"

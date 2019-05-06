@@ -8,12 +8,12 @@
     packages:
       - nfs-kernel-server
 
-- name: copy /etc/exports
-  template: 
-    src: exports.j2
-    dest: /etc/exports
-    owner: root 
-    group: root
+- name: add line to /etc/exports
+  lineinfile: 
+    path: /etc/exports
+    line: "{{nfs_server_dir}}\t192.168.0.1/24(rw,sync,no_subtree_check,insecure,no_root_squash)"
+    insertafter: EOF
+    state: present
 
 - name: Restart the exports file.
   command: 'exportfs -ra'

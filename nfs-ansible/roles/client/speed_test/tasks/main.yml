@@ -1,0 +1,36 @@
+---
+- name: remove testfile
+  file:
+    name: "{{client_mount_dir}}/testfile"
+    state: absent
+
+- name: write test to nfs server
+  shell: time dd if=/dev/zero of="{{client_mount_dir}}"/testfile bs=16k count=16384
+  args:  
+    warn: False
+    executable: /bin/bash
+  register: test_write
+
+- name: read test to nfs server
+  shell: time dd if="{{client_mount_dir}}"/testfile of=/dev/null bs=16k
+  args:  
+    warn: False
+    executable: /bin/bash
+  register: test_read
+
+- debug:
+    msg: "{{test_write.stdout}}"
+
+- debug:
+    msg: "{{test_write.stderr}}"
+
+- debug:
+    msg: "{{test_read.stdout}}"
+
+- debug:
+    msg: "{{test_read.stderr}}"
+
+- name: remove testfile
+  file:
+    name: "{{client_mount_dir}}/testfile"
+    state: absent

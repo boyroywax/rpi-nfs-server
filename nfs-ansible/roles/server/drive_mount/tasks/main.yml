@@ -1,17 +1,8 @@
 ---
-- name: Create mountable dir for drive/ssd/mmc
-  file: 
-    path: "{{nfs_server_drive_dir}}"
-    state: directory
-    mode: 777
-    owner: root
-    group: root
-    force: no
-
 - name: unmount drive if it is already mounted
   mount: 
     path: "{{ nfs_server_drive_dir }}"
-    state: absent
+    state: unmounted
 
 - name: make sure the mount drive has a filesystem
   filesystem: 
@@ -19,6 +10,11 @@
     dev: "{{ nfs_server_drive | default('/dev/mmcblk1p1') }}"
     force: "{{ nfs_server_drive_format }}"
     # opts: -cc
+
+- name: Create mountable dir for drive/ssd/mmc
+  file: 
+    path: "{{ nfs_server_drive_dir }}"
+    state: directory
 
 - name: set mountpoints for drive/ssd/mmc
   mount: 
@@ -37,12 +33,7 @@
   file: 
     path: "{{ nfs_server_dir }}"
     state: directory
-    mode: 777
-    owner: nobody
-    group: nogroup
-
-- stat: path=/home/user/optional/file.yml
-  register: optional_file
-- include: /home/user/optional/file.yml
-  when: optional_file.stat.exists
-  ignore_errors: True
+    # mode: 644
+    # owner: nobody
+    # group: nogroup
+    # force: no
