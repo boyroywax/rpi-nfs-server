@@ -138,7 +138,7 @@ https://serverfault.com/questions/306204/what-are-typical-nfs-read-write-rates
 
 Test NFS Write speed:
 ```bash
-time dd if=/dev/zero of=$LOCAL_MOUNT_DIR/testfile bs=16k count=16384
+time dd if=/dev/zero of=$LOCAL_MOUNT_DIR/testfile bs=16k count=128k
 ```
 
 Test NFS Read speed:
@@ -150,7 +150,8 @@ time dd if=$LOCAL_MOUNT_DIR/testfile of=/dev/null bs=16k
 ## Edit fstab to enable the NFS mount at startup
    ```bash
    sudo echo "$NFS_IP:$NFS_MOUNT_DIR $LOCAL_MOUNT_DIR nfs4 _netdev,auto   0      0" | sudo tee -a /etc/fstab
-
+   ```
+   
 ## Spin up k3s
 1. On your master
    ```bash
@@ -176,7 +177,7 @@ time dd if=$LOCAL_MOUNT_DIR/testfile of=/dev/null bs=16k
 
 
 
-## Amsible NFS deployment
+## Ansible NFS deployment
 * https://advishnuprasad.com/blog/2016/03/29/setup-nfs-server-and-client-using-ansible/
 * https://github.com/gc3-uzh-ch/ansible-playbooks/tree/master/roles/common/tasks
 
