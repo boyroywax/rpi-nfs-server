@@ -151,34 +151,7 @@ time dd if=$LOCAL_MOUNT_DIR/testfile of=/dev/null bs=16k
    ```bash
    sudo echo "$NFS_IP:$NFS_MOUNT_DIR $LOCAL_MOUNT_DIR nfs4 _netdev,auto   0      0" | sudo tee -a /etc/fstab
    ```
-   
-## Spin up k3s
-1. On your master
-   ```bash
-   curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v0.4.0" INSTALL_K3S_EXEC="--disable-agent --no-deploy traefik --no-deploy servicelb" sh -
-   ```
-   Uninstall at ```/usr/local/bin/k3s-uninstall.sh```
-2. Grab the Node Token
-    ```bash
-    export NTOKEN=$(sudo cat /var/lib/rancher/k3s/server/node-token)
-    ```
-3. Create some workers
-    Run on master:
-    ```bash
-    curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v0.4.0" K3S_URL=https://$IP:6443 K3S_TOKEN=$NTOKEN sh -
-    ```
-    Get the command to copy to other nodes:
-    ```bash
-    echo "url -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v0.4.0" K3S_URL=https://$IP:6443 K3S_TOKEN=$NTOKEN sh -"
-    ```
-
-
-## Ansible k3s deployment
-
-
 
 ## Ansible NFS deployment
 * https://advishnuprasad.com/blog/2016/03/29/setup-nfs-server-and-client-using-ansible/
 * https://github.com/gc3-uzh-ch/ansible-playbooks/tree/master/roles/common/tasks
-
-
