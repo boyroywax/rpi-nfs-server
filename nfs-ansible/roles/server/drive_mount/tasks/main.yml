@@ -8,8 +8,9 @@
   filesystem: 
     fstype: "{{ nfs_server_drive_fstype }}"
     dev: "{{ nfs_server_drive | default('/dev/mmcblk1p1') }}"
-    force: "{{ nfs_server_drive_format }}"
+    force: yes
     # opts: -cc
+  when: ( nfs_server_drive_format == True )
 
 - name: Create mountable dir for drive/ssd/mmc
   file: 
