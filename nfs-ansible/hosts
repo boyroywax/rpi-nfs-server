@@ -1,5 +1,5 @@
 [nfs_server]
-odroid-03 ansible_host=odroid-03.local
+odroid-04 ansible_host=odroid-04.local
 
 [nfs_clients]
 odroid-01.local
