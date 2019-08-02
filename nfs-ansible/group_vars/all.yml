@@ -1,10 +1,10 @@
 ansible_user: odroid
 ansible_sudo_pass: odroid
 
-nfs_server_drive: /dev/mmcblk1p1 # usb drive /dev/sda1, default is /dev/mmcblk1p1 for mmc/sd card
+nfs_server_drive: /dev/sda1 # usb drive /dev/sda1, default is /dev/mmcblk1p1 for mmc/sd card
 nfs_server_drive_fstype: vfat # ntfs/vfat
 nfs_server_drive_format: True # force format type True/False. False if ntfs
-nfs_server_drive_type: mmc # mmc/ssd/hdd
+nfs_server_drive_type: ssd # mmc/ssd/hdd
 nfs_server_drive_dir: "/media/{{nfs_server_drive_type}}" 
 nfs_server_dir: "{{nfs_server_drive_dir}}/nfs"
 

@@ -10,6 +10,7 @@
     warn: False
     executable: /bin/bash
   register: test_write
+  ignore_errors: yes
 
 - name: read test to nfs server
   shell: time dd if="{{client_mount_dir}}"/testfile of=/dev/null bs=16k
@@ -17,6 +18,7 @@
     warn: False
     executable: /bin/bash
   register: test_read
+  ignore_errors: yes
 
 - debug:
     msg: "{{test_write.stdout}}"

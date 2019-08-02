@@ -8,10 +8,10 @@
   file:
     path: "{{ client_mount_dir }}"
     state: directory
-    # mode: 0777
-    # recurse: yes
-    # owner: root
-    # group: root
+    mode: 0777
+    recurse: yes
+    owner: root
+    group: root
 
 - name: set mountpoints
   mount: 
@@ -19,6 +19,6 @@
     src: "{{hostvars[groups['nfs_server'][0]]['ansible_host']}}:{{nfs_server_dir}}"
     fstype: nfs4
     opts: _netdev,auto
-    dump: 0 
-    passno: 0 
+    dump: "0" 
+    passno: "0" 
     state: mounted

@@ -1,4 +1,9 @@
 ---
+- name: Ensure nfs server is stopped
+  service: 
+    name: nfs-kernel-server
+    state: stopped
+
 - name: unmount drive if it is already mounted
   mount: 
     path: "{{ nfs_server_drive_dir }}"
@@ -23,8 +28,8 @@
     src: "{{ nfs_server_drive | default('/dev/mmcblk1p1') }}"
     fstype: auto 
     opts: defaults,auto,umask=000,users,rw
-    dump: 0 
-    passno: 0 
+    dump: "0"
+    passno: "0"
     state: mounted
 
 - name: Reboot to verify fstab setting stick
@@ -34,7 +39,10 @@
   file: 
     path: "{{ nfs_server_dir }}"
     state: directory
-    # mode: 644
-    # owner: nobody
-    # group: nogroup
-    # force: no
+    mode: 0644
+#     owner: nobody
+#     group: nogroup
+#     recurse: yes
+#     force: yes
+#   ignore_errors: True
+    
