@@ -18,4 +18,3 @@
   roles:
     - { role: client/install }
     - { role: client/speed_test}
-
