@@ -1,16 +1,16 @@
 ---
-# - hosts: all
-#   gather_facts: yes
-#   become: yes
-#   roles:
-#     - { role: common }
-
-- hosts: nfs_server
+- hosts: all
   gather_facts: yes
   become: yes
   roles:
-    - { role: server/drive_mount }
-    - { role: server/install }
+    - { role: common }
+
+# - hosts: nfs_server
+#   gather_facts: yes
+#   become: yes
+#   roles:
+#     - { role: server/drive_mount }
+#     - { role: server/install }
 
 - hosts: nfs_clients
   gather_facts: yes

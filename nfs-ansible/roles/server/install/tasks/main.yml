@@ -1,12 +1,5 @@
 ---
-- name: Ensure NFS utilities are installed.
-  apt: 
-    name: "{{ packages }}"
-    state: installed
-    update_cache: yes
-  vars:  
-    packages:
-      - nfs-kernel-server
+
 
 - name: add line to /etc/exports
   lineinfile: 

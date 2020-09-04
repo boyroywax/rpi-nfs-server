@@ -16,7 +16,7 @@
 - name: Ensure NFS utilities are installed.
   apt: 
     name: "{{ packages }}"
-    state: installed
+    state: present
     update_cache: yes
   vars:
     packages:

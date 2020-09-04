@@ -2,4 +2,4 @@
 odroid-01 ansible_host=odroid-01.local
 
 [nfs_clients]
-odroid-02.local
+odroid-03.local

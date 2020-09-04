@@ -1,4 +1,13 @@
 ---
+- name: Ensure NFS utilities are installed.
+  apt: 
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:  
+    packages:
+      - nfs-kernel-server
+
 - name: Ensure nfs server is stopped
   service: 
     name: nfs-kernel-server
