@@ -1,4 +1,4 @@
 ecdsa==0.11
-paramiko==1.15.1
+paramiko==2.10.1
 pycrypto==2.6.1
 scp==0.8.0
